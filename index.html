@@ -1,58 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />  
-  <title> Doge ball </title>
+    <meta charset="utf-8" />
+    <title> Doge ball </title>
 
-  <style>
-    
-   #divball{
-     animation:gravitationalpull 3s infinite linear;
-    }
-    
-    @keyframes gravitationalpull {
-      0%{  left: 750px;   }    
-      100%{  left:-50px; }
-      
-    }
-    
-    
-    
-    .animatedog {
-      animation:TheGreatEscape 500ms;
-      
-    }
-    @keyframes TheGreatEscape {
-      0%{ top:250px; }
-      35% { top: 100px;}
-      70% {top: 100px; }
-      100%{ top:250px; }   
-    }
-  </style>
-  <script>
-    function fnjump(e){
+    <style>
 
-  if (e.keyCode === 32 || e.keyCode === 13){
-			 if(!document.querySelector("#divdoggy").classList.contains('animatedog')){
-       	  document.getElementById('divdoggy').classList.add('animatedog');
-       }
-       setTimeout(function(){
-       	document.getElementById('divdoggy').classList.remove('animatedog')
-       },500)
-       
-  }
-}
-  </script>
+        #divball {
+            animation: gravitationalpull 3s infinite linear;
+        }
+
+        @keyframes gravitationalpull {
+            0% {
+                left: 750px;
+                 transform: rotate(360deg); 
+            }
+
+            100% {
+                left: -50px;
+                transform: rotate(0deg);
+            }
+        }
+
+
+
+        .animatedog {
+            animation: TheGreatEscape 500ms;
+        }
+
+        @keyframes TheGreatEscape {
+            0% {
+                top: 250px;
+            }
+
+            35% {
+                top: 100px;
+            }
+
+            70% {
+                top: 100px;
+            }
+
+            100% {
+                top: 250px;
+            }
+        }
+    </style>
+    <script>
+    function fnjump(e) {
+
+      if (e.keyCode === 32 || e.keyCode === 13){
+			if(!document.querySelector("#divdoggy").classList.contains('animatedog')){
+       	      document.getElementById('divdoggy').classList.add('animatedog');
+           }
+           setTimeout(function(){
+       	    document.getElementById('divdoggy').classList.remove('animatedog')
+           },500)
+
+      }
+    }
+
+        var IsGameOver = setInterval(function () {
+            var dogTop = document.getElementById('divdoggy').offsetTop;
+            var ballLeft = document.getElementById('divball').offsetLeft;
+            if (dogTop > 250 && ballLeft > 0 && ballLeft < 80) {
+                document.getElementById('divball').style.animation = 'none';
+                document.getElementById('divball').style.display = 'none';
+                document.getElementById('divgameover').style.display = 'block';
+            }
+
+        }, 60);
+
+
+   </script>
 </head>
 <body onkeypress="fnjump(event)">
-<div style="width:800px;height:400px;border:1px solid blue;">
-<div id="divdoggy" style="width:150px;height:150px;background-image:url('images/gif_doge.gif');background-size:contain; background-repeat:no-repeat; position:relative;top:250px;"></div>
-<div id="divball" style="width:50px;height:50px;background-image:url('images/SpikeyDoom.png');position:absolute;top:350px;left:750px;background-size:contain;background-repeat:no-repeat;">
+    <div style="width:800px;height:400px;border:1px solid blue;">
+        <div id="divdoggy" style="width: 100px; height: 100px; background-image: url('images/dog.png'); background-size: contain; background-repeat: no-repeat; position: relative; top: 300px; "></div>
+        <div id="divball" style="width:50px;height:50px;background-image:url('images/SpikeyDoom.png');position:absolute;top:350px;left:750px;background-size:contain;background-repeat:no-repeat;"></div>
 
-
+<div id="divgameover" style="display:none; text-align: center;">
+    <span style="color: red; font-size: 50px;"> GAMEOVER! </span>
 </div>
+        
 
-  </div>
-  </body>
-  
+    </div>
+</body>
+
 </html>
